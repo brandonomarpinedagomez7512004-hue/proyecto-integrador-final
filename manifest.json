@@ -1,0 +1,22 @@
+{
+  "name": "DevConnect - Red Social",
+  "short_name": "DevConnect",
+  "description": "La red social exclusiva para desarrolladores de la clase.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f3f4f6",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
