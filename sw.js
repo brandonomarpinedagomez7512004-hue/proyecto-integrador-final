@@ -1,7 +1,7 @@
 // sw.js - Service Worker con Cache API (App Shell + funcionamiento sin conexión)
 
 // 1. Nombre y versión de la caché. Si cambias CSS/HTML/JS, sube la versión (v3, v4...)
-const CACHE_NAME = 'devconnect-shell-v3';
+const CACHE_NAME = 'devconnect-shell-v4';
 
 // 2. Recursos estáticos del App Shell (todos permiten CORS, así que usamos addAll)
 const STATIC_ASSETS = [
@@ -105,6 +105,8 @@ self.addEventListener('fetch', event => {
           if (peticion.mode === 'navigate') {
             return caches.match('/index.html');
           }
+          // Para cualquier otro recurso, devolvemos una respuesta válida vacía
+          return new Response('', { status: 408, statusText: 'Sin conexión' });
         });
     })
   );
