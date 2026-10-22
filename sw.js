@@ -1,7 +1,7 @@
 // sw.js - Service Worker con Cache API (App Shell + funcionamiento sin conexión)
 
 // 1. Nombre y versión de la caché. Si cambias CSS/HTML/JS, sube la versión (v3, v4...)
-const CACHE_NAME = 'devconnect-shell-v2';
+const CACHE_NAME = 'devconnect-shell-v3';
 
 // 2. Recursos estáticos del App Shell (todos permiten CORS, así que usamos addAll)
 const STATIC_ASSETS = [
@@ -73,7 +73,8 @@ self.addEventListener('activate', event => {
   );
 });
 
-// FASE FETCH: primero la caché; si no está, red; y se guarda una copia para la próxima vez
+// FASE FETCH: estrategia Cache First
+// Primero la caché; si no está, red; y se guarda una copia para la próxima vez
 self.addEventListener('fetch', event => {
   const peticion = event.request;
 
@@ -85,9 +86,11 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(peticion, { ignoreVary: true }).then(enCache => {
       if (enCache) {
+        console.log('SW: Sirviendo desde Caché ->', peticion.url);
         return enCache; // Respuesta inmediata desde la caché (funciona sin internet)
       }
 
+      console.log('SW: No está en caché, pidiendo a la red ->', peticion.url);
       return fetch(peticion)
         .then(respuesta => {
           // Guardamos copia (por ejemplo, las fuentes de los iconos de Font Awesome)
