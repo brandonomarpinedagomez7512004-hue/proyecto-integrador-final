@@ -1,7 +1,7 @@
 // sw.js - Service Worker con Cache API (App Shell + funcionamiento sin conexión)
 
 // 1. Nombre y versión de la caché. Si cambias CSS/HTML/JS, sube la versión (v3, v4...)
-const CACHE_NAME = 'devconnect-shell-v4';
+const CACHE_NAME = 'devconnect-shell-v5';
 
 // 2. Recursos estáticos del App Shell (todos permiten CORS, así que usamos addAll)
 const STATIC_ASSETS = [
